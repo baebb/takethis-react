@@ -1,4 +1,4 @@
-# react-redux-firebase-auth
+# takethis-react
 
 Building and making edits:
 
