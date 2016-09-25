@@ -1,4 +1,4 @@
-export default function(state = [], action) {
+export default function() {
   return [
     ["Arts, Crafts & Sewing","ArtsAndCrafts"],
     ["Baby","Baby"],

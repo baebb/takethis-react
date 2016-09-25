@@ -1,7 +1,15 @@
 .form-inline > .form-group {
-    margin-right: 10px;
+    /*margin-right: 10px;*/
 }
 
 .form-group > select.form-control-lg {
     padding: 0 1.5rem;
+}
+
+.form-group > input[name="productName"] {
+    width: 100%;
+}
+
+.form-group > #productCategory {
+    width: 100%;
 }

@@ -14,43 +14,47 @@ class ProductSearch extends React.Component {
 
   searchProductHandler(e) {
     e.preventDefault();
-
+    console.log(this.state);
   }
 
   renderCategories(category) {
-      return (
-        <option key={category[1]} value={category[1]}>{category[0]}</option>
-      )
+    return (
+      <option key={category[1]} value={category[1]}>{category[0]}</option>
+    )
   }
 
   handleChange(key, e) {
-    console.log(this.state);
     let newState = {};
     newState[key] = e.target.value;
     this.setState(newState);
   }
 
-  render(){
-    console.log(this.props);
+  render() {
     return (
-      <div>
+      <div className="row">
         <form className="form-inline" onSubmit={this.searchProductHandler.bind(this)}>
-          <div className="form-group">
-              <input
-                onChange={this.handleChange.bind(this, 'productName')}
-                name="productName"
-                type="text"
-                className="form-control form-control-lg"
-                placeholder="Product name"
-              />
+          <div className="form-group col-md-5">
+            <input
+              onChange={this.handleChange.bind(this, 'productName')}
+              name="productName"
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Product name"
+            />
           </div>
-          <div className="form-group">
-              <select className="form-control form-control-lg">
-                <option>Product category</option>
-                {this.props.categories.map(this.renderCategories)}
-              </select>
+          <div className="form-group col-md-4">
+            <select
+              className="form-control form-control-lg"
+              id="productCategory"
+              onChange={this.handleChange.bind(this, 'productCategory')}
+            >
+              <option disabled>Product category</option>
+              {this.props.categories.map(this.renderCategories)}
+            </select>
           </div>
-          <button type="submit" className="btn btn-primary btn-lg"><i className="fa fa-fw fa-search"></i> Find</button>
+          <div className="col-md-2">
+            <button type="submit" className="btn btn-primary btn-lg"><i className="fa fa-search"></i> Find</button>
+          </div>
         </form>
         <div className="productList">
 
@@ -60,10 +64,10 @@ class ProductSearch extends React.Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     categories: state.categories
   };
 }
 
-export default ProductSearch = connect(mapStateToProps,{getProduct})(ProductSearch);
+export default ProductSearch = connect(mapStateToProps, {getProduct})(ProductSearch);
