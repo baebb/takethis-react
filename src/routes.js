@@ -7,5 +7,6 @@ import Home from './components/home';
 export default (
     <Route path="/" component={App} >
         <IndexRoute component={Home} />
+        <Route path="/recommend" component={recommend} />
     </Route>
 )
