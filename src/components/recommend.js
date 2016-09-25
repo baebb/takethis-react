@@ -22,14 +22,14 @@ class Recommend extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-10 offset-md-1">
-          <form onSubmit={this.addRecommendHandler.bind(this)}>
-            <div className="form-group row productSearch">
-              <div className="col-xs-12">
-                <h3>Find product</h3>
-                <ProductSearch />
-              </div>
+        <div className="col-md-8 offset-md-2">
+          <div className="form-group row productSearch">
+            <div className="col-xs-12">
+              <h3>Find product</h3>
+              <ProductSearch />
             </div>
+          </div>
+          <form onSubmit={this.addRecommendHandler.bind(this)}>
             <div className="form-group row destination">
               <div className="col-xs-12">
                 <h3>Where did you use it?</h3>
