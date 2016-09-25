@@ -13,3 +13,7 @@
 .form-group > #productCategory {
     width: 100%;
 }
+
+.productList .list-group-item-heading {
+    min-height: 44px;
+}

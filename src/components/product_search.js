@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {getProduct} from '../actions/index';
+import {getProducts,selectProduct} from '../actions/index';
 
 class ProductSearch extends React.Component {
   constructor(props) {
@@ -14,13 +14,20 @@ class ProductSearch extends React.Component {
 
   searchProductHandler(e) {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
+    this.props.getProducts({
+      keyword: this.state.productName,
+      category: this.state.productCategory
+    })
   }
 
-  renderCategories(category) {
-    return (
-      <option key={category[1]} value={category[1]}>{category[0]}</option>
-    )
+  selectProductHandler(id) {
+    // console.log(id);
+    let selectedProduct = this.props.results.find((product) => {
+      return product.ASIN == id;
+    })
+    console.log(selectedProduct);
+    this.props.selectProduct(selectedProduct);
   }
 
   handleChange(key, e) {
@@ -29,35 +36,64 @@ class ProductSearch extends React.Component {
     this.setState(newState);
   }
 
-  render() {
+  renderCategories(category) {
     return (
-      <div className="row">
-        <form className="form-inline" onSubmit={this.searchProductHandler.bind(this)}>
-          <div className="form-group col-md-5">
-            <input
-              onChange={this.handleChange.bind(this, 'productName')}
-              name="productName"
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Product name"
-            />
-          </div>
-          <div className="form-group col-md-4">
-            <select
-              className="form-control form-control-lg"
-              id="productCategory"
-              onChange={this.handleChange.bind(this, 'productCategory')}
-            >
-              <option disabled>Product category</option>
-              {this.props.categories.map(this.renderCategories)}
-            </select>
-          </div>
-          <div className="col-md-2">
-            <button type="submit" className="btn btn-primary btn-lg"><i className="fa fa-search"></i> Find</button>
-          </div>
-        </form>
-        <div className="productList">
+      <option key={category[1]} value={category[1]}>{category[0]}</option>
+    )
+  }
 
+  renderResults(result) {
+    return (
+      <div
+        onClick={this.selectProductHandler.bind(this, result.ASIN)}
+        key={result.ASIN}
+        id={result.ASIN}
+        className="list-group-item list-group-item-action"
+      >
+        <h5 className="list-group-item-heading">{result.title}</h5>
+        <p className="list-group-item-text">{result.brand}</p>
+      </div>
+    )
+  }
+
+  render() {
+    const {results} = this.props;
+    // console.log(this.props);
+    return (
+      <div>
+        <div className="row">
+          <form className="form-inline" onSubmit={this.searchProductHandler.bind(this)}>
+            <div className="form-group col-md-5">
+              <input
+                onChange={this.handleChange.bind(this, 'productName')}
+                name="productName"
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Product name"
+              />
+            </div>
+            <div className="form-group col-md-4">
+              <select
+                className="form-control form-control-lg"
+                id="productCategory"
+                onChange={this.handleChange.bind(this, 'productCategory')}
+              >
+                {this.props.categories.map(this.renderCategories)}
+              </select>
+            </div>
+            <div className="col-md-2">
+              <button type="submit" className="btn btn-primary btn-lg"><i className="fa fa-search"></i> Find</button>
+            </div>
+          </form>
+        </div>
+        <div className="row">
+          <div className="col-xs-12">
+            {results.length > 1 &&
+            <div className="productList list-group">
+              {results.map(this.renderResults.bind(this))}
+            </div>
+            }
+          </div>
         </div>
       </div>
     )
@@ -66,8 +102,10 @@ class ProductSearch extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    categories: state.categories
+    categories: state.categories,
+    results: state.searchProducts.results,
+    selected: state.searchProducts.selected
   };
 }
 
-export default ProductSearch = connect(mapStateToProps, {getProduct})(ProductSearch);
+export default ProductSearch = connect(mapStateToProps,{getProducts,selectProduct})(ProductSearch);

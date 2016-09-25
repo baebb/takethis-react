@@ -20,6 +20,8 @@ class Recommend extends React.Component {
   }
 
   render() {
+    const {selected} = this.props;
+    console.log(selected);
     return (
       <div className="row">
         <div className="col-md-10 offset-md-1">
@@ -27,6 +29,19 @@ class Recommend extends React.Component {
             <div className="col-xs-12">
               <h3>Find product</h3>
               <ProductSearch />
+              {selected &&
+              <div className="selectedProduct list-group-item">
+                <div className="row">
+                  <div className="col-xs-2">
+                    <img className="img-fluid m-x-auto d-block" src={selected.imgMedium}/>
+                  </div>
+                  <div className="col-xs-10">
+                    <h4 className="list-group-item-heading">{selected.title}</h4>
+                    <p className="list-group-item-text">{selected.brand}</p>
+                  </div>
+                </div>
+              </div>
+              }
             </div>
           </div>
           <form onSubmit={this.addRecommendHandler.bind(this)}>
@@ -34,10 +49,9 @@ class Recommend extends React.Component {
               <div className="col-xs-12 col-md-6">
                 <h3>Where did you use it?</h3>
                 <div className="input-group input-group-lg">
-                  <span className="input-group-addon" id="basic-addon1">
+                  <span className="input-group-addon">
                     <i className="fa fa-map-marker fa-lg"></i></span>
-                  <input type="text" className="form-control" placeholder="Location"
-                         aria-describedby="basic-addon1"/>
+                  <input type="text" className="form-control" placeholder="Location"/>
                 </div>
               </div>
             </div>
@@ -54,4 +68,8 @@ class Recommend extends React.Component {
   }
 }
 
-export default Recommend = connect(null, {})(Recommend);
+function mapStateToProps(state) {
+  return {selected: state.searchProducts.selected};
+}
+
+export default Recommend = connect(mapStateToProps, {})(Recommend);
