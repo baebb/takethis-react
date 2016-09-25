@@ -1,7 +1,3 @@
-.form-inline > .form-group {
-    /*margin-right: 10px;*/
-}
-
 .form-group > select.form-control-lg {
     padding: 0 1.5rem;
 }
@@ -16,4 +12,8 @@
 
 .productList .list-group-item-heading {
     min-height: 44px;
+}
+
+.recommendProduct .block {
+    margin-top: 30px;
 }

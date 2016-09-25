@@ -9,7 +9,6 @@ class Recommend extends React.Component {
     super(props);
 
     this.state = {
-      product: '',
       destination: '',
       reason: ''
     }
@@ -23,9 +22,9 @@ class Recommend extends React.Component {
     const {selected} = this.props;
     console.log(selected);
     return (
-      <div className="row">
+      <div className="row recommendProduct">
         <div className="col-md-10 offset-md-1">
-          <div className="form-group row productSearch">
+          <div className="row productSearch block">
             <div className="col-xs-12">
               <h3>Find product</h3>
               <ProductSearch />
@@ -45,7 +44,7 @@ class Recommend extends React.Component {
             </div>
           </div>
           <form onSubmit={this.addRecommendHandler.bind(this)}>
-            <div className="form-group row destination">
+            <div className="form-group row destination block">
               <div className="col-xs-12 col-md-6">
                 <h3>Where did you use it?</h3>
                 <div className="input-group input-group-lg">
@@ -55,10 +54,15 @@ class Recommend extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="form-group row reason">
+            <div className="form-group row reason block">
               <div className="col-xs-12">
                 <h3>How did it help you?</h3>
                 <textarea className="form-control" rows="5"></textarea>
+              </div>
+            </div>
+            <div className="row submit block">
+              <div className="col-xs-12">
+                <button type="submit" className="btn btn-lg btn-primary pull-xs-right">Recommend</button>
               </div>
             </div>
           </form>

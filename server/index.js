@@ -2,7 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http');
-const axios = require('axios');
 const amazon = require('amazon-product-api');
 
 //amazon set up
