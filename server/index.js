@@ -5,15 +5,12 @@ const http = require('http');
 const axios = require('axios');
 const amazon = require('amazon-product-api');
 
-//amazon api setup
-const amazonAccessKeyId = 'AKIAJIELYRCM6DTW7ILQ';
-const amazonSecretKey = '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';
-const amazonAssociateId = 'takethis0e-20';
-
+//amazon set up
+const config = require('./config');
 const client = amazon.createClient({
-    awsId: amazonAccessKeyId,
-    awsSecret: amazonSecretKey,
-    awsTag: amazonAssociateId
+    awsId: config.amazonAccessKeyId,
+    awsSecret: config.amazonSecretKey,
+    awsTag: config.amazonAssociateId
 });
 
 //app setup
