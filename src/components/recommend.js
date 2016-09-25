@@ -22,7 +22,7 @@ class Recommend extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-8 offset-md-2">
+        <div className="col-md-10 offset-md-1">
           <div className="form-group row productSearch">
             <div className="col-xs-12">
               <h3>Find product</h3>
@@ -31,10 +31,11 @@ class Recommend extends React.Component {
           </div>
           <form onSubmit={this.addRecommendHandler.bind(this)}>
             <div className="form-group row destination">
-              <div className="col-xs-12">
+              <div className="col-xs-12 col-md-6">
                 <h3>Where did you use it?</h3>
                 <div className="input-group input-group-lg">
-                  <span className="input-group-addon" id="basic-addon1">@</span>
+                  <span className="input-group-addon" id="basic-addon1">
+                    <i className="fa fa-map-marker fa-lg"></i></span>
                   <input type="text" className="form-control" placeholder="Location"
                          aria-describedby="basic-addon1"/>
                 </div>

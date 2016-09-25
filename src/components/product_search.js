@@ -18,13 +18,9 @@ class ProductSearch extends React.Component {
   }
 
   renderCategories(category) {
-    console.log('got me');
-    // categories.map((category) => {
-    //   console.log(category[0], category[1]);
       return (
-        <option value={category[1]}>{category[0]}</option>
+        <option key={category[1]} value={category[1]}>{category[0]}</option>
       )
-    // })
   }
 
   handleChange(key, e) {
@@ -40,25 +36,21 @@ class ProductSearch extends React.Component {
       <div>
         <form className="form-inline" onSubmit={this.searchProductHandler.bind(this)}>
           <div className="form-group">
-            <div className="input-group input-group-lg">
-              <span className="input-group-addon">@</span>
               <input
                 onChange={this.handleChange.bind(this, 'productName')}
                 name="productName"
                 type="text"
-                className="form-control"
+                className="form-control form-control-lg"
                 placeholder="Product name"
               />
-            </div>
           </div>
           <div className="form-group">
-            <div className="input-group input-group-lg">
               <select className="form-control form-control-lg">
+                <option>Product category</option>
                 {this.props.categories.map(this.renderCategories)}
               </select>
-            </div>
           </div>
-          <button type="submit" className="btn btn-primary btn-lg">Find</button>
+          <button type="submit" className="btn btn-primary btn-lg"><i className="fa fa-fw fa-search"></i> Find</button>
         </form>
         <div className="productList">
 
