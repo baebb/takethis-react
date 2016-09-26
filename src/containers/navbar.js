@@ -11,21 +11,6 @@ class Navbar extends React.Component {
     }
   }
 
-  handleChange(key, e) {
-    let newState = {};
-    newState[key] = e.target.value;
-    this.setState(newState);
-  }
-
-  searchHandler(e) {
-    e.preventDefault();
-    // this.props.addRecommend({
-    //   product: this.props.selected,
-    //   destination: this.state.destination,
-    //   reason: this.state.reason
-    // })
-  }
-
   render() {
     return (
       <nav className="navbar navbar-light bg-faded">

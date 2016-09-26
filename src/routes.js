@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route, Router, IndexRoute} from 'react-router';
 
-import App from './components/app';
-import Home from './components/home';
-import Recommend from './components/recommend';
+import App from './containers/app';
+import Home from './containers/home';
+import Recommend from './containers/recommend';
 
 export default (
   <Router>

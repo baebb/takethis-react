@@ -13,4 +13,8 @@ class Home extends React.Component {
     }
 }
 
-export default connect(null,null)(Home);
+function mapStateToProps(state) {
+  return {recommends: state.recommends}
+}
+
+export default Home = connect(mapStateToProps,null)(Home);
