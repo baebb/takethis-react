@@ -1,5 +1,5 @@
 {
-  "name": "takethis server",
+  "name": "takethis-server",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -16,6 +16,7 @@
   "dependencies": {
     "amazon-product-api": "^0.4.2",
     "body-parser": "^1.15.2",
+    "express": "^4.14.0",
     "morgan": "^1.7.0"
   },
   "devDependencies": {

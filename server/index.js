@@ -4,12 +4,19 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const amazon = require('amazon-product-api');
 
-//amazon set up
-const config = require('./config');
+//amazon set up local
+// const config = require('./config');
+// const client = amazon.createClient({
+//   awsId: config.amazonAccessKeyId,
+//   awsSecret: config.amazonSecretKey,
+//   awsTag: config.amazonAssociateId
+// });
+
+//amazon set up production
 const client = amazon.createClient({
-  awsId: config.amazonAccessKeyId,
-  awsSecret: config.amazonSecretKey,
-  awsTag: config.amazonAssociateId
+  awsId: process.env.amazonAccessKeyId,
+  awsSecret: process.env.amazonSecretKey,
+  awsTag: process.env.amazonAssociateId
 });
 
 //app setup
