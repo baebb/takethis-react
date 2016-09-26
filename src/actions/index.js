@@ -1,7 +1,8 @@
 import {GET_PRODUCTS, SELECT_PRODUCT} from './types';
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:3000';
+const LOCAL_SERVER_URL = 'http://localhost:5000';
+const SERVER_URL = 'https://takethis-server.herokuapp.com';
 
 export function getProducts(props) {
   const keyword = props.keyword;
