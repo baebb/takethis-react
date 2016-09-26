@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import ProductSearch from './product_search';
+import {addRecommend} from '../actions/index';
 
 
 class Recommend extends React.Component {
@@ -14,13 +15,24 @@ class Recommend extends React.Component {
     }
   }
 
+  handleChange(key, e) {
+    let newState = {};
+    newState[key] = e.target.value;
+    this.setState(newState);
+  }
+
   addRecommendHandler(e) {
     e.preventDefault();
+    this.props.addRecommend({
+      product: this.props.selected,
+      destination: this.state.destination,
+      reason: this.state.reason
+    })
   }
 
   render() {
     const {selected} = this.props;
-    console.log(selected);
+    // console.log(selected);
     return (
       <div className="row recommendProduct">
         <div className="col-md-10 offset-md-1">
@@ -50,14 +62,14 @@ class Recommend extends React.Component {
                 <div className="input-group input-group-lg">
                   <span className="input-group-addon">
                     <i className="fa fa-map-marker fa-lg"></i></span>
-                  <input type="text" className="form-control" placeholder="Location"/>
+                  <input type="text" onChange={this.handleChange.bind(this, 'destination')} className="form-control" placeholder="Location"/>
                 </div>
               </div>
             </div>
             <div className="form-group row reason block">
               <div className="col-xs-12">
                 <h3>How did it help you?</h3>
-                <textarea className="form-control" rows="5"></textarea>
+                <textarea className="form-control" onChange={this.handleChange.bind(this, 'reason')} rows="5"></textarea>
               </div>
             </div>
             <div className="row submit block">
@@ -73,7 +85,10 @@ class Recommend extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {selected: state.searchProducts.selected};
+  return {
+    selected: state.searchProducts.selected,
+    recommends: state.recommends
+  };
 }
 
-export default Recommend = connect(mapStateToProps, {})(Recommend);
+export default Recommend = connect(mapStateToProps, {addRecommend})(Recommend);

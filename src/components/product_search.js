@@ -26,7 +26,7 @@ class ProductSearch extends React.Component {
     let selectedProduct = this.props.results.find((product) => {
       return product.ASIN == id;
     })
-    console.log(selectedProduct);
+    //console.log(selectedProduct);
     this.props.selectProduct(selectedProduct);
   }
 
@@ -76,8 +76,9 @@ class ProductSearch extends React.Component {
               <select
                 className="form-control form-control-lg"
                 id="productCategory"
-                onChange={this.handleChange.bind(this, 'productCategory')}
-              >
+                defaultValue={'placeholder'}
+                onChange={this.handleChange.bind(this, 'productCategory')}>
+                <option value={'placeholder'} disabled>Category</option>
                 {this.props.categories.map(this.renderCategories)}
               </select>
             </div>
