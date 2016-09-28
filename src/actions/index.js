@@ -79,7 +79,7 @@ export function getRecommends() {
     recommendsRef.on("value", (snapshot) => {
       dispatch({
         type: GET_RECOMMENDS,
-        data: snapshot.val()
+        payload: snapshot.val()
       })
     })
   }
