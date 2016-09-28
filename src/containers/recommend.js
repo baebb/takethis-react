@@ -50,9 +50,7 @@ class Recommend extends React.Component {
                 <ProductSearch />
                 {selected &&
                 <SelectedProduct
-                  title={selected.title}
-                  brand={selected.brand}
-                  imgMedium={selected.imgMedium}
+                  title={selected.title} brand={selected.brand} imgMedium={selected.imgMedium}
                 /> }
               </div>
             </div>
