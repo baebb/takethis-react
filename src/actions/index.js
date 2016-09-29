@@ -9,13 +9,23 @@ import {
   RECOMMEND_DISPLAY_ERROR
 } from './types';
 import axios from 'axios';
-import * as Firebase from 'firebase';
+import Firebase from 'firebase';
 
 const LOCAL_SERVER_URL = 'http://localhost:5000';
 const SERVER_URL = 'https://takethis-server.herokuapp.com';
 const FIREBASE_URL = 'https://takethis-93203.firebaseio.com/';
 
 const recommendsRef = new Firebase(FIREBASE_URL).child("recommends");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBonhzdkZ6DeQYhSqSNLVjGfWlWGM6h9yI",
+  authDomain: "takethis-93203.firebaseapp.com",
+  databaseURL: "https://takethis-93203.firebaseio.com",
+  storageBucket: "takethis-93203.appspot.com",
+  messagingSenderId: "1036649018270"
+};
+
+Firebase.initializeApp(firebaseConfig);
 
 export function getProducts(props) {
   const request = axios({

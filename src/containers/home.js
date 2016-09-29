@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 
 
 class Home extends React.Component {
-  renderRecommend(props){
+  renderRecommend(props,rid){
     return (
-      <div key={props.product.ASIN} className="recommend list-group-item">
+      <div key={rid} className="recommend list-group-item">
         <div className="row">
           <div className="col-xs-2">
             <img className="img-fluid m-x-auto d-block" src={props.product.imgMedium}/>
@@ -26,7 +26,7 @@ class Home extends React.Component {
       <div className="home">
         <div className="row">
           <div className="col-md-8 offset-md-2">
-            {this.props.recommends.map(this.renderRecommend)}
+            {this.props.recommends.data.map(this.renderRecommend)}
           </div>
         </div>
       </div>
@@ -35,7 +35,10 @@ class Home extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {recommends: state.recommends}
+  return {
+    recommends: state.recommends
+
+  }
 }
 
 export default Home = connect(mapStateToProps, null)(Home);
