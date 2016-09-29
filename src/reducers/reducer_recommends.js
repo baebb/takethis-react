@@ -4,7 +4,7 @@ const init_state = {
   hasReceivedData: false,
   submittingNew: false,
   states: {}, // this will store per recommend id if we're reading, editing or awaiting DB response
-  data: {} // this will contain firebase data
+  data: [] // this will contain firebase data
 }
 
 export default function (state = init_state, action) {
@@ -16,11 +16,12 @@ export default function (state = init_state, action) {
     // case ADD_RECOMMEND:
     //   return [...state, action.payload];
     case GET_RECOMMENDS:
-      // return Object.assign({},state,{
-      //   hasReceivedData: true,
-      //   data: action.payload
-      // });
-      return {...state, hasReceivedData: true, data: action.payload};
+      let newArr = [];
+      for (var i in action.payload) {
+        action.payload[i].id = i;
+        newArr.push(action.payload[i]);
+      }
+      return {...state, hasReceivedData: true, data: newArr};
     default:
       return state;
   }

@@ -1,32 +1,30 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import RecommendItem from '../components/recommend_item'
 
 class Home extends React.Component {
-  renderRecommend(props,rid){
+  renderRecommend(props){
     return (
-      <div key={rid} className="recommend list-group-item">
-        <div className="row">
-          <div className="col-xs-2">
-            <img className="img-fluid m-x-auto d-block" src={props.product.imgMedium}/>
-          </div>
-          <div className="col-xs-10">
-            <h4 className="list-group-item-heading">{props.product.title}</h4>
-            <p className="list-group-item-text">{props.product.brand}</p>
-            <p className="list-group-item-text">{props.reason}</p>
-            <span className="tag tag-default pull-xs-right">{props.destination}</span>
-          </div>
-        </div>
-      </div>
+      <RecommendItem
+        key={props.id}
+        imgMedium={props.product.imgMedium}
+        title={props.product.title}
+        brand={props.product.brand}
+        reason={props.reason}
+        destination={props.destination}
+      />
     )
   }
 
   render() {
+    // console.log(this.props);
+    const {recommends} = this.props;
     return (
       <div className="home">
         <div className="row">
           <div className="col-md-8 offset-md-2">
-            {/*{this.props.recommends.data.map(this.renderRecommend)}*/}
+            {recommends.hasReceivedData && recommends.data.map(this.renderRecommend)}
           </div>
         </div>
       </div>
@@ -37,7 +35,6 @@ class Home extends React.Component {
 function mapStateToProps(state) {
   return {
     recommends: state.recommends
-
   }
 }
 
