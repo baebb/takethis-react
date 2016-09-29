@@ -15,7 +15,7 @@ const LOCAL_SERVER_URL = 'http://localhost:5000';
 const SERVER_URL = 'https://takethis-server.herokuapp.com';
 const FIREBASE_URL = 'https://takethis-93203.firebaseio.com/';
 
-const recommendsRef = new Firebase(FIREBASE_URL).child("recommends");
+// const recommendsRef = new Firebase(FIREBASE_URL).child("recommends");
 
 const firebaseConfig = {
   apiKey: "AIzaSyBonhzdkZ6DeQYhSqSNLVjGfWlWGM6h9yI",
@@ -26,6 +26,8 @@ const firebaseConfig = {
 };
 
 Firebase.initializeApp(firebaseConfig);
+
+const recommendsRef = Firebase.database().ref('recommends/');
 
 export function getProducts(props) {
   const request = axios({
@@ -78,10 +80,10 @@ export function addRecommend(props) {
 
   console.log('addRecommend hit');
   console.log(props);
-  return {
-    type: ADD_RECOMMEND,
-    payload: props
-  }
+  // return {
+  //   type: ADD_RECOMMEND,
+  //   payload: props
+  // }
 }
 
 export function getRecommends() {

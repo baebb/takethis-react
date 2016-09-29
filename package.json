@@ -4,7 +4,7 @@
   "description": "React + redux boilerplate code",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --progress --inline --hot",
+    "start": "webpack-dev-server --progress --inline --hot --define process.env.NODE_ENV='\"development\"' ",
     "build-prod": "webpack -p --define process.env.NODE_ENV='\"production\"' --progress --colors",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"

@@ -26,7 +26,7 @@ class Home extends React.Component {
       <div className="home">
         <div className="row">
           <div className="col-md-8 offset-md-2">
-            {this.props.recommends.data.map(this.renderRecommend)}
+            {/*{this.props.recommends.data.map(this.renderRecommend)}*/}
           </div>
         </div>
       </div>

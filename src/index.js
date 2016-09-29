@@ -8,6 +8,8 @@ import Thunk from 'redux-thunk';
 
 import Routes from './routes';
 import reducers from './reducers';
+import * as Actions from './actions/index';
+
 
 
 let store = createStore(reducers, compose(
@@ -20,3 +22,7 @@ ReactDOM.render(
     <Router history={browserHistory} routes={Routes}/>
   </Provider>
   , document.querySelector('.container'));
+
+setTimeout(function(){
+  store.dispatch( Actions.getRecommends() );
+});
