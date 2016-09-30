@@ -36,9 +36,9 @@ class Login extends React.Component {
     )
   }
 
-  renderAuthenticationError() {
-    if (this.props.authenticationError) {
-      return <div className="alert alert-danger">{ this.props.authenticationError }</div>;
+  renderAuthError() {
+    if (this.props.authError) {
+      return <div className="alert alert-danger">{ this.props.authError }</div>;
     }
     return <div></div>;
   }

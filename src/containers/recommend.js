@@ -21,7 +21,7 @@ class Recommend extends React.Component {
     if(!this.props.authenticated) {
       let hasLocalKey = false;
 
-      for (let key in localStorage) {
+      for (var key in localStorage) {
         if (key.startsWith("firebase:authUser:")) {
           hasLocalKey = true;
         }

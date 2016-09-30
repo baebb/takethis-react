@@ -61,7 +61,7 @@ export function addRecommend(props) {
   // console.log(props);
   return (dispatch, getState) => {
     const state = getState();
-    console.log(state);
+    //console.log(state);
     dispatch({type: AWAIT_NEW_RECOMMEND_RESPONSE});
     recommendsRef.push(props, (error) => {
       dispatch({type: RECEIVE_NEW_RECOMMEND_RESPONSE})
@@ -126,6 +126,7 @@ export function authError(error) {
 }
 
 export function signOutUser() {
+  Firebase.auth().signOut();
   browserHistory.push('/');
 
   return {
