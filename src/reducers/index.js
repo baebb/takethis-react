@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import {reducer as formReducer } from 'redux-form';
+
 import SearchProductsReducer from './reducer_search_products';
 import CategoryReducer from './reducer_categories';
 import RecommendReducer from './reducer_recommends';
@@ -8,7 +10,8 @@ const rootReducer = combineReducers({
   searchProducts: SearchProductsReducer,
   categories: CategoryReducer,
   recommends: RecommendReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
+  form: formReducer
 });
 
 export default rootReducer;
