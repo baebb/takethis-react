@@ -17,6 +17,22 @@ class Recommend extends React.Component {
     }
   }
 
+  componentWillMount() {
+    if(!this.props.authenticated) {
+      let hasLocalKey = false;
+
+      for (let key in localStorage) {
+        if (key.startsWith("firebase:authUser:")) {
+          hasLocalKey = true;
+        }
+      }
+
+      if (!hasLocalKey) {
+        browserHistory.push('/login');
+      }
+    }
+  }
+
   handleChange(key, e) {
     let newState = {};
     newState[key] = e.target.value;
@@ -88,6 +104,7 @@ class Recommend extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    authenticated: state.auth.authenticated,
     selected: state.searchProducts.selected,
     recommends: state.recommends
   };

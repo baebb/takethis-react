@@ -10,10 +10,8 @@ import Routes from './routes';
 import reducers from './reducers';
 import * as Actions from './actions/index';
 
-
-
 let store = createStore(reducers, compose(
-  applyMiddleware(Promise,Thunk),
+  applyMiddleware(Promise, Thunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 
@@ -23,6 +21,7 @@ ReactDOM.render(
   </Provider>
   , document.querySelector('.container'));
 
-setTimeout(function(){
-  store.dispatch( Actions.getRecommends() );
+setTimeout(function () {
+  store.dispatch(Actions.verifyAuth());
+  store.dispatch(Actions.getRecommends());
 });

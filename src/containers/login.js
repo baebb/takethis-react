@@ -49,11 +49,11 @@ class Login extends React.Component {
         <div className="col-xs-12 col-md-4 offset-md-4">
           <h2 className="text-center">Log In</h2>
 
-          { this.renderAuthenticationError() }
+          { this.renderAuthError() }
 
           <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-            <Field name="email" component={this.renderField} className="form-control" type="text" label="Email"/>
-            <Field name="password" component={this.renderField} className="form-control" type="password" label="Password"/>
+            <Field name="email" component={this.renderField} type="text" label="Email"/>
+            <Field name="password" component={this.renderField} type="password" label="Password"/>
 
             <button action="submit" className="btn btn-primary">Sign In</button>
           </form>
@@ -62,3 +62,19 @@ class Login extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    authError: state.auth.error
+  }
+}
+
+Login = reduxForm({
+  form: 'login',
+  validate
+})(Login);
+
+export default Login = connect(mapStateToProps,{signInUser})(Login);
+
+
+

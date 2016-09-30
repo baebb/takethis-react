@@ -5,6 +5,7 @@ import App from './containers/app';
 import Home from './containers/home';
 import Recommend from './containers/recommend';
 import Signup from './containers/signup';
+import Login from './containers/login';
 
 export default (
   <Router>
@@ -13,6 +14,6 @@ export default (
       <Route path="recommend" component={Recommend}/>
     </Route>
     <Route path="/signup" component={Signup} />
-    {/*<Route path="/login" component={Login}></Route>*/}
+    <Route path="/login" component={Login}></Route>
   </Router>
 )

@@ -1,14 +1,14 @@
 import {
   GET_PRODUCTS,
   SELECT_PRODUCT,
-  ADD_RECOMMEND,
   GET_RECOMMENDS,
   AWAIT_NEW_RECOMMEND_RESPONSE,
   RECEIVE_NEW_RECOMMEND_RESPONSE,
   RECOMMEND_DISPLAY_MESSAGE,
   RECOMMEND_DISPLAY_ERROR,
   AUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  SIGN_OUT_USER
 } from './types';
 import {browserHistory} from 'react-router';
 import axios from 'axios';
@@ -122,5 +122,25 @@ export function authError(error) {
   return {
     type: AUTH_ERROR,
     payload: error
+  }
+}
+
+export function signOutUser() {
+  browserHistory.push('/');
+
+  return {
+    type: SIGN_OUT_USER
+  }
+}
+
+export function verifyAuth() {
+  return function (dispatch) {
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        dispatch(authUser());
+      } else {
+        dispatch(signOutUser());
+      }
+    });
   }
 }
