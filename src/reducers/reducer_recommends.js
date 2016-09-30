@@ -1,4 +1,4 @@
-import {ADD_RECOMMEND, GET_RECOMMENDS, RECEIVE_NEW_RECOMMEND_RESPONSE, AWAIT_NEW_RECOMMEND_RESPONSE} from '../actions/types';
+import {GET_RECOMMENDS, RECEIVE_NEW_RECOMMEND_RESPONSE, AWAIT_NEW_RECOMMEND_RESPONSE} from '../actions/types';
 
 const init_state = {
   hasReceivedData: false,

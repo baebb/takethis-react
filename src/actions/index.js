@@ -6,7 +6,9 @@ import {
   AWAIT_NEW_RECOMMEND_RESPONSE,
   RECEIVE_NEW_RECOMMEND_RESPONSE,
   RECOMMEND_DISPLAY_MESSAGE,
-  RECOMMEND_DISPLAY_ERROR
+  RECOMMEND_DISPLAY_ERROR,
+  AUTH_USER,
+  AUTH_ERROR
 } from './types';
 import {browserHistory} from 'react-router';
 import axios from 'axios';
@@ -81,5 +83,44 @@ export function getRecommends() {
         payload: snapshot.val()
       })
     })
+  }
+}
+
+export function signUpUserEmail(creds) {
+  return (dispatch) => {
+    Firebase.auth().createUserWithEmailAndPassword(creds.email, creds.password)
+      .then((response) => {
+        dispatch(authUser());
+        browserHistory.push('/');
+      })
+      .catch((error) => {
+        dispatch(authError(error));
+      })
+  }
+}
+
+export function signInUser(creds) {
+  return (dispatch) => {
+    Firebase.auth().signInWithEmailAndPassword(creds.email, creds.password)
+      .then((response) => {
+        dispatch(authUser());
+        browserHistory.push('/');
+      })
+      .catch((error) => {
+        dispatch(authError(error));
+      })
+  }
+}
+
+export function authUser() {
+  return {
+    type: AUTH_USER
+  }
+}
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
   }
 }
