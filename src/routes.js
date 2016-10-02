@@ -12,8 +12,8 @@ export default (
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
       <Route path="recommend" component={Recommend}/>
+      <Route path="signup" component={Signup} />
+      <Route path="login" component={Login} />
     </Route>
-    <Route path="/signup" component={Signup} />
-    <Route path="/login" component={Login}></Route>
   </Router>
 )

@@ -10,8 +10,8 @@ class Navbar extends React.Component {
 
     this.state = {
       searchInput: '',
-      isLogged: false,
-      hidden: true
+      // isLogged: false,
+      // hidden: true
     }
   }
 
@@ -26,7 +26,7 @@ class Navbar extends React.Component {
   // }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <nav className="navbar navbar-light bg-faded">
         <button className="navbar-toggler hidden-sm-up" type="button">
@@ -35,10 +35,11 @@ class Navbar extends React.Component {
         <div className="collapse navbar-toggleable-xs" id="navbar">
           <Link to="/" className="navbar-brand">Take This</Link>
           {/*{!this.state.hidden &&*/}
+          //TODO: fix login/logout flicker
           <div className="nav navbar-nav pull-xs-right">
             <Link to="recommend" className="nav-item nav-link">Recommend something</Link>
             <Link to="/" className="nav-item nav-link">About</Link>
-            {this.state.isLogged ?
+            {this.props.authenticated ?
               <a className="nav-item nav-link" onClick={this.props.signOutUser}>Logout</a>
               :
               <Link to="/login" className="nav-item nav-link">Login</Link>

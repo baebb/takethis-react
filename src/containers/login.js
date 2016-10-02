@@ -44,20 +44,18 @@ class Login extends React.Component {
   }
 
   render() {
-    return(
-      <div className="row">
-        <div className="col-xs-12 col-md-4 offset-md-4">
-          <h2 className="text-center">Log In</h2>
+    return (
+      <div className="col-xs-12 col-md-4 offset-md-4">
+        <h2 className="text-center">Log In</h2>
 
-          { this.renderAuthError() }
+        { this.renderAuthError() }
 
-          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-            <Field name="email" component={this.renderField} type="text" label="Email"/>
-            <Field name="password" component={this.renderField} type="password" label="Password"/>
+        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+          <Field name="email" component={this.renderField} type="text" label="Email"/>
+          <Field name="password" component={this.renderField} type="password" label="Password"/>
 
-            <button action="submit" className="btn btn-primary">Sign In</button>
-          </form>
-        </div>
+          <button action="submit" className="btn btn-primary">Sign In</button>
+        </form>
       </div>
     );
   }
@@ -74,7 +72,7 @@ Login = reduxForm({
   validate
 })(Login);
 
-export default Login = connect(mapStateToProps,{signInUser})(Login);
+export default Login = connect(mapStateToProps, {signInUser})(Login);
 
 
 

@@ -54,17 +54,15 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-xs-12 col-md-4 offset-md-4">
-          <h2 className="text-center">Sign Up</h2>
-          {this.renderAuthError()}
-          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-            <Field name="email" type="text" component={this.renderField} label="Email"/>
-            <Field name="password" type="password" component={this.renderField} label="Password"/>
-            <Field name="passwordConfirm" type="password" component={this.renderField} label="Re-type password"/>
-            <button action="submit" className="btn btn-primary m-x-auto">Sign up</button>
-          </form>
-        </div>
+      <div className="col-xs-12 col-md-4 offset-md-4">
+        <h2 className="text-center">Sign Up</h2>
+        {this.renderAuthError()}
+        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+          <Field name="email" type="text" component={this.renderField} label="Email"/>
+          <Field name="password" type="password" component={this.renderField} label="Password"/>
+          <Field name="passwordConfirm" type="password" component={this.renderField} label="Re-type password"/>
+          <button action="submit" className="btn btn-primary m-x-auto">Sign up</button>
+        </form>
       </div>
     )
   }
