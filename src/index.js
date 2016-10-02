@@ -21,7 +21,8 @@ ReactDOM.render(
   </Provider>
   , document.querySelector('.container'));
 
+store.dispatch(Actions.verifyAuth());
+
 setTimeout(function () {
-  store.dispatch(Actions.verifyAuth());
   store.dispatch(Actions.getRecommends());
 });

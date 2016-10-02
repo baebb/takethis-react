@@ -28,17 +28,17 @@ class Navbar extends React.Component {
   render() {
     // console.log(this.state);
     return (
-      <nav className="navbar navbar-light bg-faded">
+      <nav className="navbar navbar-light bg-faded takethis-nav">
         <button className="navbar-toggler hidden-sm-up" type="button">
           &#9776;
         </button>
         <div className="collapse navbar-toggleable-xs" id="navbar">
           <Link to="/" className="navbar-brand">Take This</Link>
           {/*{!this.state.hidden &&*/}
-          //TODO: fix login/logout flicker
+          {/*TODO: fix login/logout flicker*/}
           <div className="nav navbar-nav pull-xs-right">
-            <Link to="recommend" className="nav-item nav-link">Recommend something</Link>
-            <Link to="/" className="nav-item nav-link">About</Link>
+            <Link to="recommend" className="nav-item nav-link">New Recommendation</Link>
+            <Link to="/signup" className="nav-item nav-link">Signup</Link>
             {this.props.authenticated ?
               <a className="nav-item nav-link" onClick={this.props.signOutUser}>Logout</a>
               :
