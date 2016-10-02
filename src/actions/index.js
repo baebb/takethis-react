@@ -6,6 +6,7 @@ import {
   RECEIVE_NEW_RECOMMEND_RESPONSE,
   RECOMMEND_DISPLAY_MESSAGE,
   RECOMMEND_DISPLAY_ERROR,
+  ATTEMPT_LOGIN,
   AUTH_USER,
   AUTH_ERROR,
   SIGN_OUT_USER
@@ -86,6 +87,21 @@ export function getRecommends() {
   }
 }
 
+export function signInUserTwitter() {
+  return (dispatch) => {
+    let provider = new Firebase.auth.TwitterAuthProvider();
+    dispatch({type: ATTEMPT_LOGIN});
+    Firebase.auth().signInWithPopup(provider)
+      .then((response) => {
+        dispatch(authUser());
+        browserHistory.push('/');
+      })
+      .catch((error) => {
+        dispatch(authError(error));
+      })
+  }
+}
+
 export function signUpUserEmail(creds) {
   return (dispatch) => {
     Firebase.auth().createUserWithEmailAndPassword(creds.email, creds.password)
@@ -101,6 +117,7 @@ export function signUpUserEmail(creds) {
 
 export function signInUser(creds) {
   return (dispatch) => {
+    dispatch({type: ATTEMPT_LOGIN});
     Firebase.auth().signInWithEmailAndPassword(creds.email, creds.password)
       .then((response) => {
         dispatch(authUser());
@@ -112,7 +129,7 @@ export function signInUser(creds) {
   }
 }
 
-export function authUser() {
+export function authUser(dispatch) {
   return {
     type: AUTH_USER
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {signInUser} from '../actions/index';
+import {signInUserTwitter,signInUser} from '../actions/index';
 
 const validate = values => {
   const errors = {};
@@ -50,12 +50,18 @@ class Login extends React.Component {
 
         { this.renderAuthError() }
 
-        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-          <Field name="email" component={this.renderField} type="text" label="Email"/>
-          <Field name="password" component={this.renderField} type="password" label="Password"/>
 
-          <button action="submit" className="btn btn-primary">Sign In</button>
-        </form>
+        <div className="social-signin">
+          <button className="btn btn-info" onClick={this.props.signInUserTwitter}>Sign in with Twitter</button>
+        </div>
+        <div className="email-signin">
+          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+            <Field name="email" component={this.renderField} type="text" label="Email"/>
+            <Field name="password" component={this.renderField} type="password" label="Password"/>
+
+            <button action="submit" className="btn btn-primary">Sign In</button>
+          </form>
+        </div>
       </div>
     );
   }
@@ -72,7 +78,7 @@ Login = reduxForm({
   validate
 })(Login);
 
-export default Login = connect(mapStateToProps, {signInUser})(Login);
+export default Login = connect(mapStateToProps, {signInUser,signInUserTwitter})(Login);
 
 
 

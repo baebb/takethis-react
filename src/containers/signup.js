@@ -28,6 +28,14 @@ const validate = (values) => {
 }
 
 class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      emailTab: false
+    }
+  }
+
   handleFormSubmit = (props) => {
     this.props.signUpUserEmail(props);
   }

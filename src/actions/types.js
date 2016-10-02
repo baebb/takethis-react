@@ -12,4 +12,5 @@ export const RECOMMEND_DISPLAY_MESSAGE = 'RECOMMEND_DISPLAY_MESSAGE';
 //authentication
 export const AUTH_USER = 'AUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const ATTEMPT_LOGIN = 'ATTEMPT_LOGIN';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
