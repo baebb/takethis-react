@@ -67,7 +67,7 @@ export function addRecommend(props) {
     recommendsRef.push(props, (error) => {
       dispatch({type: RECEIVE_NEW_RECOMMEND_RESPONSE})
       if (error) {
-        dispatch({type: RECOMMEND_DISPLAY_ERROR, error: "Submission failed!"+error});
+        dispatch({type: RECOMMEND_DISPLAY_ERROR, error: "Submission failed!" + error});
       } else {
         dispatch({type: RECOMMEND_DISPLAY_MESSAGE, message: "Submission posted!"});
         browserHistory.push('/')
@@ -87,12 +87,31 @@ export function getRecommends() {
   }
 }
 
+export function createUser(props) {
+  Firebase.database().ref(`users/${props.uid}`).once("value")
+    .then((snapshot) => {
+      if (!snapshot.exists()) {
+        // console.log(' doesnt exists')
+        // console.log(props);
+        Firebase.database().ref(`users/${props.uid}`).set({
+          username: props.displayName || null,
+          email: props.email,
+          photoURL: props.photoURL || null
+        })
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
 export function signInUserTwitter() {
   return (dispatch) => {
     let provider = new Firebase.auth.TwitterAuthProvider();
     dispatch({type: ATTEMPT_LOGIN});
     Firebase.auth().signInWithPopup(provider)
       .then((response) => {
+        dispatch(createUser(response.user));
         dispatch(authUser());
         browserHistory.push('/');
       })

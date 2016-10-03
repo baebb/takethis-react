@@ -2,7 +2,8 @@ import {AUTH_USER, SIGN_OUT_USER, AUTH_ERROR} from '../actions/types';
 
 const init_state = {
   authenticated: false,
-  error: null
+  error: null,
+  user: {}
 }
 
 export default function (state = init_state, action) {
@@ -12,7 +13,7 @@ export default function (state = init_state, action) {
     case AUTH_ERROR:
       return {...state, authenticated: false, error: action.payload.message};
     case SIGN_OUT_USER:
-      return {...state, authenticated: false, error: null};
+      return {...state, authenticated: false, error: null, user: {}};
     default:
       return state;
   }
