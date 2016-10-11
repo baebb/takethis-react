@@ -88,34 +88,41 @@ export function getRecommends() {
 }
 
 export function createUser(props) {
-  Firebase.database().ref(`users/${props.uid}`).once("value")
-    .then((snapshot) => {
-      if (!snapshot.exists()) {
-        // console.log(' doesnt exists')
-        // console.log(props);
-        Firebase.database().ref(`users/${props.uid}`).set({
-          username: props.displayName || null,
-          email: props.email,
-          photoURL: props.photoURL || null
-        })
-      }
-    })
-    .catch(error => {
-      console.log(error)
-    })
+  return (dispatch) => {
+    Firebase.database().ref(`users/${props.uid}`).once("value")
+      .then((snapshot) => {
+        if (!snapshot.exists()) {
+          // console.log('create user: user does not exist')
+          // console.log(props);
+          Firebase.database().ref(`users/${props.uid}`).set({
+            username: props.displayName || null,
+            email: props.email,
+            photoURL: props.photoURL || null
+          })
+        } else {
+          // console.log('create user: user exists')
+        }
+      })
+      .catch(error => {
+        console.log('create user err', error)
+        console.log(error)
+      })
+  }
 }
 
 export function signInUserTwitter() {
   return (dispatch) => {
     let provider = new Firebase.auth.TwitterAuthProvider();
-    dispatch({type: ATTEMPT_LOGIN});
+    //dispatch({type: ATTEMPT_LOGIN});
     Firebase.auth().signInWithPopup(provider)
       .then((response) => {
+        console.log('response got ',response);
         dispatch(createUser(response.user));
         dispatch(authUser());
         browserHistory.push('/');
       })
       .catch((error) => {
+        console.log('error got ', error)
         dispatch(authError(error));
       })
   }
@@ -155,6 +162,7 @@ export function authUser(dispatch) {
 }
 
 export function authError(error) {
+  // console.log(error);
   return {
     type: AUTH_ERROR,
     payload: error
@@ -163,7 +171,7 @@ export function authError(error) {
 
 export function signOutUser() {
   Firebase.auth().signOut();
-  browserHistory.push('/');
+  browserHistory.push('/login');
 
   return {
     type: SIGN_OUT_USER
