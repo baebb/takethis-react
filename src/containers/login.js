@@ -60,7 +60,6 @@ class Login extends React.Component {
   render() {
     return (
       <div className="col-xs-12 col-md-4 offset-md-4">
-        <h2 className="text-center">Log In</h2>
 
         { this.renderAuthError() }
 
@@ -86,8 +85,7 @@ class Login extends React.Component {
           </div>
           {this.state.emailTab ?
             <div className="card-block">
-              <h4 className="card-title">Email login</h4>
-              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <p className="card-text text-xs-center">With supporting text below as a natural lead-in to additional content.</p>
               <div className="email-login">
                 <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
                   <Field name="email" component={this.renderField} type="text" label="Email"/>
@@ -98,11 +96,11 @@ class Login extends React.Component {
               </div>
             </div>
             :
-            <div className="card-block">
-              <h4 className="card-title">Social login</h4>
-              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <div className="card-block text-xs-center">
+              <p className="card-text">To post a new recommendation login with your social media account or email</p>
               <div className="social-login">
-                <button className="btn btn-info" onClick={this.props.signInUserTwitter}>Sign in with Twitter</button>
+                <button className="btn btn-primary"><i className="fa fa-lg fa-fw fa-facebook"></i> Sign in with Facebook</button>
+                <button className="btn btn-info" onClick={this.props.signInUserTwitter}><i className="fa fa-lg fa-fw fa-twitter"></i> Sign in with Twitter</button>
               </div>
             </div>
           }

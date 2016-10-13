@@ -116,13 +116,12 @@ export function signInUserTwitter() {
     //dispatch({type: ATTEMPT_LOGIN});
     Firebase.auth().signInWithPopup(provider)
       .then((response) => {
-        console.log('response got ',response);
         dispatch(createUser(response.user));
         dispatch(authUser());
         browserHistory.push('/');
       })
       .catch((error) => {
-        console.log('error got ', error)
+        //console.log('error got ', error)
         dispatch(authError(error));
       })
   }

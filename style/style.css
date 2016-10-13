@@ -21,3 +21,11 @@
 .takethis-nav {
     margin-bottom: 60px;
 }
+
+.social-login .btn {
+    width: 220px;
+}
+
+.social-login .btn:nth-child(1) {
+    margin-bottom: 10px;
+}
