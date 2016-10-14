@@ -35,28 +35,19 @@ class Login extends React.Component {
     this.props.signInUser(values);
   }
 
-  renderAuthError() {
-    return (
-      this.props.authError ?
-        <div className="alert alert-danger">{this.props.authError}</div>
-        :
-        <div></div>
-    )
-  }
-
   toggleSignUp(selected, e) {
     e.preventDefault();
-    selected == 'login' && this.setState({signUpTab: true});
-    selected == 'signup' && this.setState({signUpTab: false});
+    selected == 'signup' && this.setState({signUpTab: true});
+    selected == 'login' && this.setState({signUpTab: false});
   }
 
   render() {
     return (
-      <div className="col-xs-12 col-md-4   offset-md-4">
-
-        { this.renderAuthError() }
-
-
+      <div className="col-xs-12 col-md-4 offset-md-4">
+        {this.props.authError ?
+          <div className="alert alert-danger">{this.props.authError}</div>
+          :
+          null}
         <div className="card">
           <div className="card-header">
             <ul className="nav nav-tabs card-header-tabs pull-xs-left">
@@ -97,8 +88,7 @@ class Login extends React.Component {
                   </form>
                 </div>
               </div>
-            </div>
-          }
+            </div>}
         </div>
       </div>
     );
