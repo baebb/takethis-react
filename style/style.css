@@ -48,3 +48,7 @@ a {
 .social-login .btn:nth-child(1) {
     margin-bottom: 12px;
 }
+
+.login-tab .card-title, .signup-tab .card-title {
+    margin-bottom: 1.8rem;
+}

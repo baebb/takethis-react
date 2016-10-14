@@ -49,44 +49,28 @@ class Login extends React.Component {
           :
           null}
         <div className="card">
-          <div className="card-header">
-            <ul className="nav nav-tabs card-header-tabs pull-xs-left">
-              <li className="nav-item">
-                <a
-                  className={this.state.signUpTab ? "nav-link" : "nav-link active"}
-                  href=""
-                  onClick={this.toggleSignUp.bind(this, 'login')}
-                >Login</a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={this.state.signUpTab ? "nav-link active" : "nav-link"}
-                  href=""
-                  onClick={this.toggleSignUp.bind(this, 'signup')}
-                >Sign up</a>
-              </li>
-            </ul>
-          </div>
           {this.state.signUpTab ?
-            <div className="signup-tab">
-              <div className="card-block">
-                <p className="card-text text-xs-left">With supporting text below as a natural lead-in to additional
-                  content.</p>
-              </div>
+            <div className="signup-tab card-block">
+              <p className="card-text text-xs-left">With supporting text below as a natural lead-in to additional
+                content.</p>
+              <a onClick={this.toggleSignUp.bind(this, 'login')} className="text-muted">
+                <small>Log in</small>
+              </a>
             </div>
             :
-            <div className="login-tab">
-              <div className="card-block text-xs-left">
-                <h4 className="card-title">Log in to Take This</h4>
-                <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
-                <div className="h-divider"/>
-                <div className="email-login">
-                  <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-                    <Field name="email" component={LoginField} type="text" label="Email"/>
-                    <Field name="password" component={LoginField} type="password" label="Password"/>
-                    <button type="submit" className="btn btn-success pull-xs-right">Log in</button>
-                  </form>
-                </div>
+            <div className="login-tab card-block text-xs-left">
+              <h4 className="card-title">Log in to Take This</h4>
+              <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
+              <div className="h-divider"/>
+              <div className="email-login">
+                <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+                  <Field name="email" component={LoginField} type="text" label="Email"/>
+                  <Field name="password" component={LoginField} type="password" label="Password"/>
+                  <a onClick={this.toggleSignUp.bind(this, 'signup')} className="text-muted">
+                    <small>Sign up</small>
+                  </a>
+                  <button type="submit" className="btn btn-success pull-xs-right">Log in</button>
+                </form>
               </div>
             </div>}
         </div>
