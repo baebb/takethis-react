@@ -3,6 +3,9 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {signInUserOauth, signInUser} from '../actions/index';
 
+import SocialLogin from '../components/social_login';
+import LoginField from '../components/login_field';
+
 const validate = values => {
   const errors = {};
 
@@ -29,29 +32,19 @@ class Login extends React.Component {
   }
 
   handleFormSubmit = (values) => {
-    console.log('hit', values);
     this.props.signInUser(values);
   }
 
-  renderField = ({input, label, type, meta: {touched, error}}) => {
+  renderAuthError() {
     return (
-      <div className={`form-group ${touched && error ? 'has-error' : ''}`}>
-        <div>
-          <input {...input} placeholder={label} className="form-control" type={type}/>
-          {touched && error && <div className="help-block text-muted">{error}</div>}
-        </div>
-      </div>
+      this.props.authError ?
+        <div className="alert alert-danger">{this.props.authError}</div>
+        :
+        <div></div>
     )
   }
 
-  renderAuthError() {
-    if (this.props.authError) {
-      return <div className="alert alert-danger">{ this.props.authError }</div>;
-    }
-    return <div></div>;
-  }
-
-  toggleAuthMethod(selected, e) {
+  toggleSignUp(selected, e) {
     e.preventDefault();
     selected == 'login' && this.setState({signUpTab: true});
     selected == 'signup' && this.setState({signUpTab: false});
@@ -71,14 +64,14 @@ class Login extends React.Component {
                 <a
                   className={this.state.signUpTab ? "nav-link" : "nav-link active"}
                   href=""
-                  onClick={this.toggleAuthMethod.bind(this, 'login')}
+                  onClick={this.toggleSignUp.bind(this, 'login')}
                 >Login</a>
               </li>
               <li className="nav-item">
                 <a
                   className={this.state.signUpTab ? "nav-link active" : "nav-link"}
                   href=""
-                  onClick={this.toggleAuthMethod.bind(this, 'signup')}
+                  onClick={this.toggleSignUp.bind(this, 'signup')}
                 >Sign up</a>
               </li>
             </ul>
@@ -94,23 +87,15 @@ class Login extends React.Component {
             <div className="login-tab">
               <div className="card-block text-xs-left">
                 <h4 className="card-title">Log in to Take This</h4>
-                <p className="card-text">To post a new recommendation login with your social media account or email</p>
-                <div className="social-login">
-                  <button className="btn btn-primary text-xs-left"
-                          onClick={this.props.signInUserOauth.bind(this, 'facebook')}><i className="fa fa-lg fa-fw fa-facebook"> </i> <strong>Log in with Facebook</strong></button>
-                  <button className="btn btn-info text-xs-left"
-                          onClick={this.props.signInUserOauth.bind(this, 'twitter')}><i className="fa fa-lg fa-fw fa-twitter"> </i> <strong>Log in with Twitter</strong></button>
-                </div>
+                <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
                 <div className="h-divider"/>
                 <div className="email-login">
                   <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-                    <Field name="email" component={this.renderField} type="text" label="Email"/>
-                    <Field name="password" component={this.renderField} type="password" label="Password"/>
+                    <Field name="email" component={LoginField} type="text" label="Email"/>
+                    <Field name="password" component={LoginField} type="password" label="Password"/>
+                    <button type="submit" className="btn btn-success pull-xs-right">Log in</button>
                   </form>
                 </div>
-              </div>
-              <div className="card-footer">
-                <button onClick={this.props.handleSubmit(this.handleFormSubmit)} className="btn btn-primary pull-xs-right">Log in</button>
               </div>
             </div>
           }
