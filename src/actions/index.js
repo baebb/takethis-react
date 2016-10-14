@@ -110,9 +110,11 @@ export function createUser(props) {
   }
 }
 
-export function signInUserTwitter() {
+export function signInUserOauth(prov) {
   return (dispatch) => {
-    let provider = new Firebase.auth.TwitterAuthProvider();
+    let provider;
+    prov == 'twitter' && (provider = new Firebase.auth.TwitterAuthProvider());
+    prov == 'facebook' && (provider = new Firebase.auth.FacebookAuthProvider());
     //dispatch({type: ATTEMPT_LOGIN});
     Firebase.auth().signInWithPopup(provider)
       .then((response) => {

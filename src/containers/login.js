@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {signInUserTwitter, signInUser} from '../actions/index';
+import {signInUserOauth, signInUser} from '../actions/index';
 
 const validate = values => {
   const errors = {};
@@ -99,8 +99,8 @@ class Login extends React.Component {
             <div className="card-block text-xs-center">
               <p className="card-text">To post a new recommendation login with your social media account or email</p>
               <div className="social-login">
-                <button className="btn btn-primary"><i className="fa fa-lg fa-fw fa-facebook"></i> Sign in with Facebook</button>
-                <button className="btn btn-info" onClick={this.props.signInUserTwitter}><i className="fa fa-lg fa-fw fa-twitter"></i> Sign in with Twitter</button>
+                <button className="btn btn-primary" onClick={this.props.signInUserOauth.bind(this, 'facebook')}><i className="fa fa-lg fa-fw fa-facebook"></i> Sign in with Facebook</button>
+                <button className="btn btn-info" onClick={this.props.signInUserOauth.bind(this, 'twitter')}><i className="fa fa-lg fa-fw fa-twitter"></i> Sign in with Twitter</button>
               </div>
             </div>
           }
@@ -121,7 +121,7 @@ Login = reduxForm({
   validate
 })(Login);
 
-export default Login = connect(mapStateToProps, {signInUser, signInUserTwitter})(Login);
+export default Login = connect(mapStateToProps, {signInUser, signInUserOauth})(Login);
 
 
 
