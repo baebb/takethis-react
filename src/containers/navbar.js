@@ -40,7 +40,7 @@ class Navbar extends React.Component {
             <Link to="recommend" className="nav-item nav-link">New Recommendation</Link>
             <Link to="/signup" className="nav-item nav-link">Signup</Link>
             {this.props.authenticated ?
-              <a href="" className="nav-item nav-link" onClick={this.props.signOutUser}>Logout</a>
+              <a className="nav-item nav-link" onClick={this.props.signOutUser}>Logout</a>
               :
               <Link to="/login" className="nav-item nav-link">Login</Link>
             }

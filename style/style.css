@@ -1,3 +1,16 @@
+a {
+    cursor: pointer;
+}
+.h-divider {
+    margin-top: 20px;
+    margin-bottom: 16px;
+    margin-left: -20px;
+    margin-right: -20px;
+    height: 1px;
+    width: calc(100% + 40px);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
 .form-group > select.form-control-lg {
     padding: 0 1.5rem;
 }
@@ -23,9 +36,14 @@
 }
 
 .social-login .btn {
-    width: 220px;
+    width: 100%;
+}
+
+.social-login .btn i {
+    margin-right: 3px;
+    margin-left: -5px;
 }
 
 .social-login .btn:nth-child(1) {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
