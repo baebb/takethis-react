@@ -1,26 +1,9 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {signInUserOauth, signInUser} from '../actions/index';
 
 import SocialLogin from '../components/social_login';
-import LoginField from '../components/login_field';
-
-const validate = values => {
-  const errors = {};
-
-  if (!values.email) {
-    errors.email = "Please enter an email.";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  if (!values.password) {
-    errors.password = "Please enter a password.";
-  }
-
-  return errors;
-};
+import EmailLogin from '../components/email_login';
 
 class Login extends React.Component {
   constructor(props) {
@@ -62,16 +45,7 @@ class Login extends React.Component {
               <h4 className="card-title">Log in to Take This</h4>
               <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
               <div className="h-divider"/>
-              <div className="email-login">
-                <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-                  <Field name="email" component={LoginField} type="text" label="Email"/>
-                  <Field name="password" component={LoginField} type="password" label="Password"/>
-                  <a onClick={this.toggleSignUp.bind(this, 'signup')} className="text-muted">
-                    <small>Sign up</small>
-                  </a>
-                  <button type="submit" className="btn btn-success pull-xs-right">Log in</button>
-                </form>
-              </div>
+              <EmailLogin onSubmit={this.handleFormSubmit} toggleSignUp={this.toggleSignUp.bind(this, 'signup')}/>
             </div>}
         </div>
       </div>
@@ -84,11 +58,6 @@ function mapStateToProps(state) {
     authError: state.auth.error
   }
 }
-
-Login = reduxForm({
-  form: 'login',
-  validate
-})(Login);
 
 export default Login = connect(mapStateToProps, {signInUser, signInUserOauth})(Login);
 
