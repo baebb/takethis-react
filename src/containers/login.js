@@ -32,6 +32,10 @@ class Login extends React.Component {
           :
           null}
         <div className="card">
+          {this.props.attempt_auth &&
+          <div className="loading">
+            <img src="../../img/spinner.svg" className="m-x-auto d-block" />
+          </div>}
           {this.state.signUpTab ?
             <div className="signup-tab card-block">
               <p className="card-text text-xs-left">With supporting text below as a natural lead-in to additional
@@ -55,6 +59,7 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    attempt_auth: state.auth.attempt_auth,
     authError: state.auth.error
   }
 }
