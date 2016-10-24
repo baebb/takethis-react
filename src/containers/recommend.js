@@ -49,8 +49,8 @@ class Recommend extends React.Component {
   }
 
   render() {
-    const {selected} = this.props;
-    // console.log(selected);
+    const {selected, user} = this.props;
+    // console.log(user);
     return (
       <div className="recommendProduct">
         <div className="row">
@@ -104,6 +104,7 @@ class Recommend extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    user: state.auth.user,
     authenticated: state.auth.authenticated,
     selected: state.searchProducts.selected,
     recommends: state.recommends

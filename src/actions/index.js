@@ -118,8 +118,9 @@ export function signInUserOauth(prov) {
     dispatch({type: ATTEMPT_AUTH});
     Firebase.auth().signInWithPopup(provider)
       .then((response) => {
+        //console.log(response.user);
         dispatch(createUser(response.user));
-        dispatch(authUser());
+        dispatch(authUser(response.user));
         browserHistory.push('/');
       })
       .catch((error) => {
@@ -133,7 +134,8 @@ export function signUpUserEmail(creds) {
   return (dispatch) => {
     Firebase.auth().createUserWithEmailAndPassword(creds.email, creds.password)
       .then((response) => {
-        dispatch(authUser());
+        // console.log(response);
+        dispatch(authUser(response.user));
         browserHistory.push('/');
       })
       .catch((error) => {
@@ -147,7 +149,8 @@ export function signInUser(creds) {
     dispatch({type: ATTEMPT_AUTH});
     Firebase.auth().signInWithEmailAndPassword(creds.email, creds.password)
       .then((response) => {
-        dispatch(authUser());
+        // console.log(response);
+        dispatch(authUser(response));
         browserHistory.push('/');
       })
       .catch((error) => {
@@ -156,9 +159,15 @@ export function signInUser(creds) {
   }
 }
 
-export function authUser(dispatch) {
+export function authUser(props) {
+  // console.log(props);
   return {
-    type: AUTH_USER
+    type: AUTH_USER,
+    payload: {
+      username: props.displayName || null,
+      email: props.email,
+      photoURL: props.photoURL || null
+    }
   }
 }
 
