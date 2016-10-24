@@ -165,7 +165,7 @@ export function authUser(props) {
     type: AUTH_USER,
     payload: {
       username: props.displayName || null,
-      email: props.email,
+      uid: props.uid,
       photoURL: props.photoURL || null
     }
   }

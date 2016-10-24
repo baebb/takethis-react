@@ -21,11 +21,12 @@ class Recommend extends React.Component {
     if(!this.props.authenticated) {
       let hasLocalKey = false;
 
-      for (var key in localStorage) {
-        if (key.startsWith("firebase:authUser:")) {
-          hasLocalKey = true;
-        }
-      }
+      // for (var key in localStorage) {
+      //   if (key.startsWith("firebase:authUser:")) {
+      //     console.log('is a user',key);
+      //     hasLocalKey = true;
+      //   }
+      // }
 
       if (!hasLocalKey) {
         browserHistory.push('/login');
@@ -44,13 +45,14 @@ class Recommend extends React.Component {
     this.props.addRecommend({
       product: this.props.selected,
       destination: this.state.destination,
-      reason: this.state.reason
+      reason: this.state.reason,
+      recommender: this.props.user
     })
   }
 
   render() {
-    const {selected, user} = this.props;
-    // console.log(user);
+    const {selected} = this.props;
+    // console.log(selected);
     return (
       <div className="recommendProduct">
         <div className="row">
