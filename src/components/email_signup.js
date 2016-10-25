@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 
 import TextField from './text_field';
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
 
   if (!values.email) {
@@ -16,27 +16,36 @@ const validate = values => {
     errors.password = "Please enter a password.";
   }
 
-  return errors;
-};
+  if (!values.passwordConfirm) {
+    errors.passwordConfirm = "Please enter a password confirmation.";
+  }
 
-class EmailLogin extends React.Component {
+  if (values.password !== values.passwordConfirm) {
+    errors.password = 'Passwords do not match';
+  }
+
+  return errors;
+}
+
+class EmailSignup extends React.Component {
   render() {
     return (
-      <div className="email-login">
+      <div className="email-signup">
         <form onSubmit={this.props.handleSubmit}>
           <Field name="email" component={TextField} type="text" label="Email"/>
           <Field name="password" component={TextField} type="password" label="Password"/>
+          <Field name="passwordConfirm" component={TextField} type="password" label="Re-enter password" />
           <a onClick={this.props.toggleSignUp} className="text-muted">
-            <small>Sign up</small>
+            <small>Log in</small>
           </a>
-          <button type="submit" className="btn btn-success pull-xs-right">Log in</button>
+          <button action="submit" className="btn btn-primary pull-xs-right">Sign up</button>
         </form>
       </div>
     )
   }
 }
 
-export default EmailLogin = reduxForm({
-  form: 'email_login',
+export default EmailSignup = reduxForm({
+  form: 'email_signup',
   validate
-})(EmailLogin);
+})(EmailSignup);

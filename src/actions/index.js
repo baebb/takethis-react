@@ -15,9 +15,9 @@ import {browserHistory} from 'react-router';
 import axios from 'axios';
 import Firebase from 'firebase';
 
-const LOCAL_SERVER_URL = 'http://localhost:5000';
+//const LOCAL_SERVER_URL = 'http://localhost:5000';
 const SERVER_URL = 'https://takethis-server.herokuapp.com';
-const FIREBASE_URL = 'https://takethis-93203.firebaseio.com/';
+//const FIREBASE_URL = 'https://takethis-93203.firebaseio.com/';
 
 
 const firebaseConfig = {
@@ -131,11 +131,14 @@ export function signInUserOauth(prov) {
 }
 
 export function signUpUserEmail(creds) {
+  // console.log('signUpUserEmail fired');
   return (dispatch) => {
     Firebase.auth().createUserWithEmailAndPassword(creds.email, creds.password)
       .then((response) => {
+        // console.log('signUpUserEmail response:');
         // console.log(response);
-        dispatch(authUser(response.user));
+        // dispatch(createUser(response));
+        dispatch(authUser(response));
         browserHistory.push('/');
       })
       .catch((error) => {
@@ -144,7 +147,8 @@ export function signUpUserEmail(creds) {
   }
 }
 
-export function signInUser(creds) {
+export function signInUserEmail(creds) {
+  // console.log('signInUserEmail fired');
   return (dispatch) => {
     dispatch({type: ATTEMPT_AUTH});
     Firebase.auth().signInWithEmailAndPassword(creds.email, creds.password)
@@ -160,7 +164,8 @@ export function signInUser(creds) {
 }
 
 export function authUser(props) {
-  // console.log(props);
+  console.log('authUser fired. props:');
+  console.log(props);
   return {
     type: AUTH_USER,
     payload: {
@@ -189,6 +194,7 @@ export function signOutUser() {
 }
 
 export function verifyAuth() {
+  console.log('verifyAuth fired');
   return function (dispatch) {
     Firebase.auth().onAuthStateChanged((user) => {
       if (user) {
