@@ -137,7 +137,7 @@ export function signUpUserEmail(creds) {
       .then((response) => {
         // console.log('signUpUserEmail response:');
         // console.log(response);
-        // dispatch(createUser(response));
+        dispatch(createUser(response));
         dispatch(authUser(response));
         browserHistory.push('/');
       })
