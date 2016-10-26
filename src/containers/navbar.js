@@ -38,11 +38,10 @@ class Navbar extends React.Component {
           {/*TODO: fix login/logout flicker*/}
           <div className="nav navbar-nav pull-xs-right">
             <Link to="recommend" className="nav-item nav-link">New Recommendation</Link>
-            <Link to="/signup" className="nav-item nav-link">Signup</Link>
             {this.props.authenticated ?
               <a className="nav-item nav-link" onClick={this.props.signOutUser}>Logout</a>
               :
-              <Link to="/login" className="nav-item nav-link">Login</Link>
+              <Link to="/login" className="nav-item nav-link">Sign Up/Login</Link>
             }
           </div>
           {/*}*/}
