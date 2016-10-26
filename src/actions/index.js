@@ -163,7 +163,7 @@ export function signInUserEmail(creds) {
   }
 }
 
-export function authUser(props) {
+export function authUser(props = {}) {
   // console.log('authUser fired. props:');
   // console.log(props);
   return {

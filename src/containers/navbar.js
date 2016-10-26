@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-import {signOutUser} from '../actions/index';
+import {signOutUser,authUser} from '../actions/index';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -15,15 +15,16 @@ class Navbar extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    nextProps.authenticated ?
-      this.setState({isLogged: true, hidden: false}) :
-      this.setState({isLogged: false, hidden: false});
+  componentDidMount() {
+    //prevents flicker of login/logout
+    if(!this.props.authenticated) {
+      for (var key in localStorage) {
+        if (key.startsWith("firebase:authUser:")) {
+          this.props.authUser();
+        }
+      }
+    }
   }
-
-  // componentDidMount() {
-  //   this.setState({hidden: false});
-  // }
 
   render() {
     // console.log(this.state);
@@ -34,8 +35,6 @@ class Navbar extends React.Component {
         </button>
         <div className="collapse navbar-toggleable-xs" id="navbar">
           <Link to="/" className="navbar-brand">Take This</Link>
-          {/*{!this.state.hidden &&*/}
-          {/*TODO: fix login/logout flicker*/}
           <div className="nav navbar-nav pull-xs-right">
             <Link to="recommend" className="nav-item nav-link">New Recommendation</Link>
             {this.props.authenticated ?
@@ -44,7 +43,6 @@ class Navbar extends React.Component {
               <Link to="/login" className="nav-item nav-link">Sign Up/Login</Link>
             }
           </div>
-          {/*}*/}
         </div>
       </nav>
     )
@@ -57,4 +55,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default Navbar = connect(mapStateToProps, {signOutUser})(Navbar);
+export default Navbar = connect(mapStateToProps, {signOutUser, authUser})(Navbar);
