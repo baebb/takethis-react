@@ -164,8 +164,8 @@ export function signInUserEmail(creds) {
 }
 
 export function authUser(props) {
-  console.log('authUser fired. props:');
-  console.log(props);
+  // console.log('authUser fired. props:');
+  // console.log(props);
   return {
     type: AUTH_USER,
     payload: {
@@ -194,12 +194,16 @@ export function signOutUser() {
 }
 
 export function verifyAuth() {
-  console.log('verifyAuth fired');
+  // console.log('verifyAuth fired');
   return function (dispatch) {
     Firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        dispatch(authUser());
+        // console.log('verifyAuth success');
+        // console.log('user:')
+        // console.log(user);
+        dispatch(authUser(user));
       } else {
+        // console.log('verifyAuth failed, signing out');
         dispatch(signOutUser());
       }
     });

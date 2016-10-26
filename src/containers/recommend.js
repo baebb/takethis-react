@@ -17,16 +17,16 @@ class Recommend extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(!this.props.authenticated) {
       let hasLocalKey = false;
 
-      // for (var key in localStorage) {
-      //   if (key.startsWith("firebase:authUser:")) {
-      //     console.log('is a user',key);
-      //     hasLocalKey = true;
-      //   }
-      // }
+      for (var key in localStorage) {
+        if (key.startsWith("firebase:authUser:")) {
+          console.log('is a user',key);
+          hasLocalKey = true;
+        }
+      }
 
       if (!hasLocalKey) {
         browserHistory.push('/login');
