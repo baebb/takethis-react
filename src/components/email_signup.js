@@ -35,7 +35,7 @@ class EmailSignup extends React.Component {
           <Field name="email" component={TextField} type="text" label="Email"/>
           <Field name="password" component={TextField} type="password" label="Password"/>
           <Field name="passwordConfirm" component={TextField} type="password" label="Re-enter password" />
-          <a onClick={this.props.toggleSignUp} className="text-muted">
+          <a onClick={this.props.toggleSignUp.bind(this, 'login')} className="text-muted">
             <small>Log in</small>
           </a>
           <button action="submit" className="btn btn-primary pull-xs-right">Sign up</button>
