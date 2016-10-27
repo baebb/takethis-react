@@ -13,7 +13,7 @@ export default function (state = init_state, action) {
     case AUTH_USER:
       return {...state, authenticated: true, authMessage: null, authMessageType: null, authLoading: false, user: action.payload};
     case AUTH_MESSAGE:
-      return {...state, authenticated: false, authMessage: action.payload.message, authLoading: false};
+      return {...state, authenticated: false, authMessage: action.payload.message, authMessageType: action.payload.type, authLoading: false};
     case SIGN_OUT_USER:
       return {...state, authenticated: false, authMessage: null, user: {}};
     case AUTH_LOADING:

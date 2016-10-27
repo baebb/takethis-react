@@ -125,7 +125,7 @@ export function signInUserOauth(prov) {
       })
       .catch((error) => {
         //console.log('error got ', error)
-        dispatch(authMessage(error));
+        dispatch(authMessage({message: error, type: 'error'}));
       })
   }
 }
@@ -142,7 +142,7 @@ export function signUpUserEmail(creds) {
         browserHistory.push('/');
       })
       .catch((error) => {
-        dispatch(authMessage(error));
+        dispatch(authMessage({message: error, type: 'error'}));
       })
   }
 }
@@ -158,25 +158,25 @@ export function signInUserEmail(creds) {
         browserHistory.push('/');
       })
       .catch((error) => {
-        dispatch(authMessage(error));
+        dispatch(authMessage({message: error.message, type: 'error'}));
+        // dispatch(authMessage(error));
       })
   }
 }
 
 export function resetUserPass(creds) {
-  console.log(creds.email);
+  // console.log(creds.email);
   return (dispatch) => {
     dispatch({type: AUTH_LOADING});
     Firebase.auth().sendPasswordResetEmail(creds.email)
       .then((response) => {
         console.log('resetUserPass success');
-        console.log(response);
-        dispatch(authMessage(response));
+        dispatch(authMessage({message: "A link to reset your password was sent", type: 'success'}));
       })
       .catch((error) => {
         console.log('resetUserPass error:');
         console.log(error);
-        dispatch(authMessage(error));
+        dispatch(authMessage({message: error.message, type: 'error'}));
       })
   }
 }

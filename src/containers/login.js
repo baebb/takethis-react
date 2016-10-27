@@ -50,7 +50,7 @@ class Login extends React.Component {
         return (
           <div className="card-block text-xs-left">
             <h4 className="card-title">Reset your password</h4>
-            <ForgotPass onSubmit={this.handleResetPassFormSubmit} toggleCurrentTab={this.toggleCurrentTab.bind(this)} />
+            <ForgotPass onSubmit={this.handleResetPassFormSubmit} toggleCurrentTab={this.toggleCurrentTab.bind(this)}/>
           </div>
         )
       default:
@@ -65,13 +65,34 @@ class Login extends React.Component {
     }
   }
 
+  renderErrorMessage() {
+    if (this.props.authMessage) {
+      // console.log('messageType:',this.props.authMessageType);
+      let messageType;
+      switch (this.props.authMessageType) {
+        case 'success':
+          messageType = "success";
+          break;
+        case 'error':
+          messageType = "danger"
+          break;
+        default:
+          messageType = "danger";
+          break;
+      }
+      return (
+        <div className={"alert alert-" + messageType}>{this.props.authMessage}</div>
+      )
+    }
+    else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <div className="col-xs-12 col-md-4 offset-md-4">
-        {this.props.authMessage ?
-          <div className="alert alert-danger">{this.props.authMessage}</div>
-          :
-          null}
+        {this.renderErrorMessage()}
         <div className="card">
           {this.props.authLoading &&
           <div className="loading">
@@ -87,11 +108,13 @@ class Login extends React.Component {
 function mapStateToProps(state) {
   return {
     authLoading: state.auth.authLoading,
-    authMessage: state.auth.authMessage
+    authMessage: state.auth.authMessage,
+    authMessageType: state.auth.authMessageType
   }
 }
 
-export default Login = connect(mapStateToProps, {signInUserEmail, signUpUserEmail, signInUserOauth, resetUserPass})(Login);
+export default Login =
+  connect(mapStateToProps, {signInUserEmail, signUpUserEmail, signInUserOauth, resetUserPass})(Login);
 
 
 
