@@ -6,7 +6,7 @@ import {
   RECEIVE_NEW_RECOMMEND_RESPONSE,
   RECOMMEND_DISPLAY_MESSAGE,
   RECOMMEND_DISPLAY_ERROR,
-  ATTEMPT_AUTH,
+  AUTH_LOADING,
   AUTH_USER,
   AUTH_ERROR,
   SIGN_OUT_USER
@@ -115,7 +115,7 @@ export function signInUserOauth(prov) {
     let provider;
     prov == 'twitter' && (provider = new Firebase.auth.TwitterAuthProvider());
     prov == 'facebook' && (provider = new Firebase.auth.FacebookAuthProvider());
-    dispatch({type: ATTEMPT_AUTH});
+    dispatch({type: AUTH_LOADING});
     Firebase.auth().signInWithPopup(provider)
       .then((response) => {
         //console.log(response.user);
@@ -150,7 +150,7 @@ export function signUpUserEmail(creds) {
 export function signInUserEmail(creds) {
   // console.log('signInUserEmail fired');
   return (dispatch) => {
-    dispatch({type: ATTEMPT_AUTH});
+    dispatch({type: AUTH_LOADING});
     Firebase.auth().signInWithEmailAndPassword(creds.email, creds.password)
       .then((response) => {
         // console.log(response);

@@ -28,11 +28,11 @@ class EmailLogin extends React.Component {
           <Field name="password" component={TextField} type="password" label="Password"/>
           <div className="row">
             <div className="col-xs-6">
-              <a onClick={this.props.toggleSignUp.bind(this, 'signup')} className="text-muted">
+              <a onClick={this.props.toggleCurrentTab.bind(this, 'signup')} className="text-muted">
                 <small>Sign up</small>
               </a>
               <br />
-              <a onClick={this.props.toggleSignUp.bind(this, 'forgotPass')} className="text-muted">
+              <a onClick={this.props.toggleCurrentTab.bind(this, 'forgotPass')} className="text-muted">
                 <small>Forgot password?</small>
               </a>
             </div>

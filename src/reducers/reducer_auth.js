@@ -1,22 +1,22 @@
-import {AUTH_USER, SIGN_OUT_USER, AUTH_ERROR, ATTEMPT_AUTH} from '../actions/types';
+import {AUTH_USER, SIGN_OUT_USER, AUTH_ERROR, AUTH_LOADING} from '../actions/types';
 
 const init_state = {
   authenticated: false,
   error: null,
   user: {},
-  attempt_auth: false
+  auth_loading: false
 }
 
 export default function (state = init_state, action) {
   switch (action.type) {
     case AUTH_USER:
-      return {...state, authenticated: true, error: null, attempt_auth: false, user: action.payload};
+      return {...state, authenticated: true, error: null, auth_loading: false, user: action.payload};
     case AUTH_ERROR:
-      return {...state, authenticated: false, error: action.payload.message, attempt_auth: false};
+      return {...state, authenticated: false, error: action.payload.message, auth_loading: false};
     case SIGN_OUT_USER:
       return {...state, authenticated: false, error: null, user: {}};
-    case ATTEMPT_AUTH:
-      return {...state, attempt_auth: true};
+    case AUTH_LOADING:
+      return {...state, auth_loading: true};
     default:
       return state;
   }

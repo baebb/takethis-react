@@ -23,11 +23,40 @@ class Login extends React.Component {
     this.props.signUpUserEmail(values);
   }
 
-  toggleSignUp(selected, e) {
+  toggleCurrentTab(selected, e) {
     e.preventDefault();
     selected == 'signup' && this.setState({currentTab: 'signup'});
     selected == 'login' && this.setState({currentTab: 'login'});
     selected == 'forgotPass' && this.setState({currentTab: 'forgotPass'});
+  }
+
+  renderCurrentTab() {
+    switch (this.state.currentTab) {
+      case 'signup':
+        return (
+          <div className="signup-tab card-block text-xs-left">
+            <h4 className="card-title">Create an account</h4>
+            <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
+            <div className="h-divider"/>
+            <EmailSignup onSubmit={this.handleSignupFormSubmit} toggleCurrentTab={this.toggleCurrentTab.bind(this)}/>
+          </div>
+        )
+      case 'forgotPass':
+        return (
+          <div className="card-block text-xs-left">
+            <h4 className="card-title">Reset your password</h4>
+          </div>
+        )
+      default:
+        return (
+          <div className="login-tab card-block text-xs-left">
+            <h4 className="card-title">Log in to Take This</h4>
+            <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
+            <div className="h-divider"/>
+            <EmailLogin onSubmit={this.handleLoginFormSubmit} toggleCurrentTab={this.toggleCurrentTab.bind(this)}/>
+          </div>
+        )
+    }
   }
 
   render() {
@@ -38,30 +67,11 @@ class Login extends React.Component {
           :
           null}
         <div className="card">
-          {this.props.attempt_auth &&
+          {this.props.auth_loading &&
           <div className="loading">
-            <img src="../../img/spinner.svg" className="m-x-auto d-block" />
+            <img src="../../img/spinner.svg" className="m-x-auto d-block"/>
           </div>}
-          {this.state.currentTab === 'signup' ?
-            <div className="signup-tab card-block text-xs-left">
-              <h4 className="card-title">Create an account</h4>
-              <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
-              <div className="h-divider"/>
-              <EmailSignup onSubmit={this.handleSignupFormSubmit} toggleSignUp={this.toggleSignUp.bind(this)}/>
-            </div>
-            : (this.state.currentTab === 'login' ?
-              <div className="login-tab card-block text-xs-left">
-                <h4 className="card-title">Log in to Take This</h4>
-                <SocialLogin signInUserOauth={this.props.signInUserOauth.bind(this)}/>
-                <div className="h-divider"/>
-                <EmailLogin onSubmit={this.handleLoginFormSubmit} toggleSignUp={this.toggleSignUp.bind(this)}/>
-              </div>
-            :
-              <div className="card-block text-xs-left">
-                <h4 className="card-title">Reset your password</h4>
-              </div>
-          )
-          }
+          {this.renderCurrentTab()}
         </div>
       </div>
     );
@@ -70,7 +80,7 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    attempt_auth: state.auth.attempt_auth,
+    auth_loading: state.auth.auth_loading,
     authError: state.auth.error
   }
 }
