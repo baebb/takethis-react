@@ -8,7 +8,7 @@ import {
   RECOMMEND_DISPLAY_ERROR,
   AUTH_LOADING,
   AUTH_USER,
-  AUTH_ERROR,
+  AUTH_MESSAGE,
   SIGN_OUT_USER
 } from './types';
 import {browserHistory} from 'react-router';
@@ -125,7 +125,7 @@ export function signInUserOauth(prov) {
       })
       .catch((error) => {
         //console.log('error got ', error)
-        dispatch(authError(error));
+        dispatch(authMessage(error));
       })
   }
 }
@@ -142,7 +142,7 @@ export function signUpUserEmail(creds) {
         browserHistory.push('/');
       })
       .catch((error) => {
-        dispatch(authError(error));
+        dispatch(authMessage(error));
       })
   }
 }
@@ -158,7 +158,25 @@ export function signInUserEmail(creds) {
         browserHistory.push('/');
       })
       .catch((error) => {
-        dispatch(authError(error));
+        dispatch(authMessage(error));
+      })
+  }
+}
+
+export function resetUserPass(creds) {
+  console.log(creds.email);
+  return (dispatch) => {
+    dispatch({type: AUTH_LOADING});
+    Firebase.auth().sendPasswordResetEmail(creds.email)
+      .then((response) => {
+        console.log('resetUserPass success');
+        console.log(response);
+        dispatch(authMessage(response));
+      })
+      .catch((error) => {
+        console.log('resetUserPass error:');
+        console.log(error);
+        dispatch(authMessage(error));
       })
   }
 }
@@ -176,11 +194,14 @@ export function authUser(props = {}) {
   }
 }
 
-export function authError(error) {
+export function authMessage(props) {
   // console.log(error);
   return {
-    type: AUTH_ERROR,
-    payload: error
+    type: AUTH_MESSAGE,
+    payload: {
+      message: props.message,
+      type: props.type || null
+    }
   }
 }
 

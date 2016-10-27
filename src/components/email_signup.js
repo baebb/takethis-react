@@ -34,11 +34,17 @@ class EmailSignup extends React.Component {
         <form onSubmit={this.props.handleSubmit}>
           <Field name="email" component={TextField} type="text" label="Email"/>
           <Field name="password" component={TextField} type="password" label="Password"/>
-          <Field name="passwordConfirm" component={TextField} type="password" label="Re-enter password" />
-          <a onClick={this.props.toggleCurrentTab.bind(this, 'login')} className="text-muted">
-            <small>Log in</small>
-          </a>
-          <button action="submit" className="btn btn-primary pull-xs-right">Sign up</button>
+          <Field name="passwordConfirm" component={TextField} type="password" label="Re-enter password"/>
+          <div className="row">
+            <div className="col-xs-6">
+              <a onClick={this.props.toggleCurrentTab.bind(this, 'login')} className="text-muted">
+                <small>Log in</small>
+              </a>
+            </div>
+            <div className="col-xs-6">
+              <button action="submit" className="btn btn-primary pull-xs-right">Sign up</button>
+            </div>
+          </div>
         </form>
       </div>
     )

@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {signInUserOauth, signInUserEmail, signUpUserEmail} from '../actions/index';
+import {signInUserOauth, signInUserEmail, signUpUserEmail, resetUserPass} from '../actions/index';
 
 import SocialLogin from '../components/social_login';
 import EmailLogin from '../components/email_login';
 import EmailSignup from '../components/email_signup';
+import ForgotPass from '../components/forgot_pass';
 
 class Login extends React.Component {
   constructor(props) {
@@ -21,6 +22,10 @@ class Login extends React.Component {
 
   handleSignupFormSubmit = (values) => {
     this.props.signUpUserEmail(values);
+  }
+
+  handleResetPassFormSubmit = (email) => {
+    this.props.resetUserPass(email);
   }
 
   toggleCurrentTab(selected, e) {
@@ -45,6 +50,7 @@ class Login extends React.Component {
         return (
           <div className="card-block text-xs-left">
             <h4 className="card-title">Reset your password</h4>
+            <ForgotPass onSubmit={this.handleResetPassFormSubmit} toggleCurrentTab={this.toggleCurrentTab.bind(this)} />
           </div>
         )
       default:
@@ -62,12 +68,12 @@ class Login extends React.Component {
   render() {
     return (
       <div className="col-xs-12 col-md-4 offset-md-4">
-        {this.props.authError ?
-          <div className="alert alert-danger">{this.props.authError}</div>
+        {this.props.authMessage ?
+          <div className="alert alert-danger">{this.props.authMessage}</div>
           :
           null}
         <div className="card">
-          {this.props.auth_loading &&
+          {this.props.authLoading &&
           <div className="loading">
             <img src="../../img/spinner.svg" className="m-x-auto d-block"/>
           </div>}
@@ -80,12 +86,12 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    auth_loading: state.auth.auth_loading,
-    authError: state.auth.error
+    authLoading: state.auth.authLoading,
+    authMessage: state.auth.authMessage
   }
 }
 
-export default Login = connect(mapStateToProps, {signInUserEmail, signUpUserEmail, signInUserOauth})(Login);
+export default Login = connect(mapStateToProps, {signInUserEmail, signUpUserEmail, signInUserOauth, resetUserPass})(Login);
 
 
 
