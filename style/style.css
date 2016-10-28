@@ -40,6 +40,32 @@ a {
     margin: auto;
 }
 
+.product-details-wrapper {
+    height: 200px;
+}
+
+.product-details-wrapper .product-details-destination {
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+}
+
+.product-details-wrapper .product-details-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 52px;
+}
+
+.product-details-wrapper .product-details-recommender {
+    margin-bottom: 5px;
+}
+
+.product-details-wrapper .product-details-reason {
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .form-group > select.form-control-lg {
     padding: 0 1.5rem;
 }
