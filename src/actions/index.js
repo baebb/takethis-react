@@ -12,6 +12,7 @@ import {
   SIGN_OUT_USER
 } from './types';
 import {browserHistory} from 'react-router';
+import {reset} from 'redux-form';
 import axios from 'axios';
 import Firebase from 'firebase';
 
@@ -171,7 +172,8 @@ export function resetUserPass(creds) {
     Firebase.auth().sendPasswordResetEmail(creds.email)
       .then((response) => {
         console.log('resetUserPass success');
-        dispatch(authMessage({message: "A link to reset your password was sent", type: 'success'}));
+        dispatch(authMessage({message: "A link to reset your password was sent to your email", type: 'success'}));
+        dispatch(reset('forgot_pass'));
       })
       .catch((error) => {
         console.log('resetUserPass error:');
