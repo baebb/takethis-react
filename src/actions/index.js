@@ -227,7 +227,7 @@ export function verifyAuth() {
         dispatch(authUser(user));
       } else {
         // console.log('verifyAuth failed, signing out');
-        dispatch(signOutUser());
+        // dispatch(signOutUser());
       }
     });
   }

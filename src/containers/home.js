@@ -10,6 +10,7 @@ class Home extends React.Component {
         key={props.id}
         imgMedium={props.product.imgMedium}
         title={props.product.title}
+        recommender={props.recommender || null}
         brand={props.product.brand}
         reason={props.reason}
         destination={props.destination}
