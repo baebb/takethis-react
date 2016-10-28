@@ -22,6 +22,24 @@ a {
     background-image: linear-gradient(135deg,#70929c,#e6846e);
 }
 
+.product-img-wrapper {
+    height: 200px;
+    position: relative;
+}
+
+.product-img {
+    max-height: 100%;
+    max-width: 100%;
+    width: calc(100% - 30px);
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .form-group > select.form-control-lg {
     padding: 0 1.5rem;
 }

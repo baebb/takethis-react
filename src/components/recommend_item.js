@@ -5,8 +5,8 @@ export default (props) => {
   return (
     <div className="recommend list-group-item">
       <div className="row">
-        <div className="col-xs-2">
-          <img className="img-fluid m-x-auto d-block" src={props.imgMedium}/>
+        <div className="col-xs-2 product-img-wrapper">
+          <img className="img-fluid product-img" src={props.imgMedium}/>
         </div>
         <div className="col-xs-10">
           <p className="list-group-item-text text-muted"><small>{props.brand}</small></p>
