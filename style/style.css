@@ -12,6 +12,16 @@ a {
     border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.user-img-small {
+    margin-bottom: 2px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.anonymous-one {
+    background-image: linear-gradient(135deg,#70929c,#e6846e);
+}
+
 .form-group > select.form-control-lg {
     padding: 0 1.5rem;
 }
