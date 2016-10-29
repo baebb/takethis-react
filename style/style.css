@@ -16,7 +16,7 @@ a {
 
 .recommend-list .recommend-list-item {
     margin-bottom: 30px;
-    border-radius: 0px;
+    border-radius: 0!important;
 }
 
 .product-img-wrapper {
