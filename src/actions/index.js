@@ -19,6 +19,7 @@ import Firebase from 'firebase';
 //const LOCAL_SERVER_URL = 'http://localhost:5000';
 const SERVER_URL = 'https://takethis-server.herokuapp.com';
 //const FIREBASE_URL = 'https://takethis-93203.firebaseio.com/';
+const MAPS_API_KEY = 'AIzaSyAwg5sgpH6fHq-WPxXV9kgXLDm8hWRpFpg';
 
 
 const firebaseConfig = {
