@@ -24,7 +24,7 @@ class Home extends React.Component {
     return (
       <div className="home">
         <div className="row">
-          <div className="col-md-8 offset-md-2">
+          <div className="col-md-8 offset-md-2 recommend-list">
             {recommends.hasReceivedData && recommends.data.map(this.renderRecommend)}
           </div>
         </div>

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 
 export default (props) => {
   return (
-    <div className="recommend list-group-item">
+    <div className="recommend-list-item list-group-item">
       <div className="row">
         <div className="col-xs-2 product-img-wrapper">
           <img className="img-fluid product-img" src={props.imgMedium}/>
