@@ -1,6 +1,7 @@
 import React from 'react';
-import {Link,browserHistory} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import {connect} from 'react-redux';
+import PlacesAutocomplete from 'react-places-autocomplete'
 
 import ProductSearch from './product_search';
 import SelectedProduct from '../components/selected_product';
@@ -10,7 +11,7 @@ import {addRecommend} from '../actions/index';
 class Recommend extends React.Component {
   constructor(props) {
     super(props);
-
+    this.onChange = (destination) => this.setState({destination})
     this.state = {
       destination: '',
       reason: ''
@@ -18,7 +19,7 @@ class Recommend extends React.Component {
   }
 
   componentDidMount() {
-    if(!this.props.authenticated) {
+    if (!this.props.authenticated) {
       let hasLocalKey = false;
 
       for (var key in localStorage) {
@@ -79,8 +80,16 @@ class Recommend extends React.Component {
                   <div className="input-group input-group-lg">
                   <span className="input-group-addon">
                     <i className="fa fa-map-marker fa-lg"></i></span>
-                    <input type="text" onChange={this.handleChange.bind(this, 'destination')} className="form-control"
-                           placeholder="Location"/>
+                    <PlacesAutocomplete
+                      placeholder={"Destination"}
+                      value={this.state.destination}
+                      classNames={
+                      {root: 'input-group input-group-lg',
+                        label: 'sr-only destination',
+                        input: 'form-control'}
+                      }
+                      onChange={this.onChange}
+                    />
                   </div>
                 </div>
               </div>
@@ -92,7 +101,7 @@ class Recommend extends React.Component {
                 </div>
               </div>
               <div className="row submit block">
-                <div className="col-xs-12">
+                <div className="col-xs-12">`
                   <button type="submit" className="btn btn-lg btn-primary pull-xs-right">Recommend</button>
                 </div>
               </div>
